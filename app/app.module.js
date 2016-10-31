@@ -10,8 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
+var router_1 = require('@angular/router');
 var app_component_1 = require('./app.component');
 var movie_repository_service_1 = require('./repositories/movie-repository.service');
+var movie_editor_component_1 = require('./movie-editor/movie-editor.component');
 var movie_list_component_1 = require('./movie-list/movie-list.component');
 var AppModule = (function () {
     function AppModule() {
@@ -20,10 +22,16 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [
                 platform_browser_1.BrowserModule,
+                router_1.RouterModule.forRoot([
+                    { path: '', component: movie_list_component_1.MovieListComponent },
+                    { path: 'add', component: movie_editor_component_1.MovieEditorComponent },
+                    { path: 'edit/:id', component: movie_editor_component_1.MovieEditorComponent }
+                ])
             ],
             declarations: [
                 app_component_1.AppComponent,
-                movie_list_component_1.MovieListComponent
+                movie_list_component_1.MovieListComponent,
+                movie_editor_component_1.MovieEditorComponent
             ],
             providers: [movie_repository_service_1.MovieRepositoryService],
             bootstrap: [app_component_1.AppComponent]
