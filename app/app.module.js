@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var router_1 = require('@angular/router');
+var forms_1 = require('@angular/forms');
 var app_component_1 = require('./app.component');
 var movie_repository_service_1 = require('./repositories/movie-repository.service');
 var movie_editor_component_1 = require('./movie-editor/movie-editor.component');
@@ -22,6 +23,7 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [
                 platform_browser_1.BrowserModule,
+                forms_1.FormsModule,
                 router_1.RouterModule.forRoot([
                     { path: '', component: movie_list_component_1.MovieListComponent },
                     { path: 'add', component: movie_editor_component_1.MovieEditorComponent },

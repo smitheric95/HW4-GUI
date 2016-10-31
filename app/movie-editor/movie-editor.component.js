@@ -12,6 +12,9 @@ var core_1 = require('@angular/core');
 var MovieEditorComponent = (function () {
     function MovieEditorComponent() {
     }
+    MovieEditorComponent.prototype.onSubmit = function (form) {
+        console.log(form);
+    };
     MovieEditorComponent = __decorate([
         core_1.Component({
             selector: 'movie-editor',

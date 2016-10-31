@@ -6,5 +6,7 @@ import {Component} from '@angular/core';
     styleUrls: [ './app/movie-editor/movie-editor.css' ]
 })
 export class MovieEditorComponent{
-
+    onSubmit(form){
+        console.log(form);
+    }
 }

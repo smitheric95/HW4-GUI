@@ -6,3 +6,9 @@
 	font-size: 20px;
 	top: 5px;
 }
+
+.btn.btn-primary {
+	position: absolute;
+	right: 50px;
+	top: 50px;
+}

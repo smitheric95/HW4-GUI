@@ -1,3 +1,4 @@
+<a class="btn btn-primary" routerLink="/add">Add Movie</a>
 <div class="media" *ngFor="let movie of movies">
 	<span class="media-left">
 		<img [src]="movie.imagePath" alt="{{ movie.title }}" />
@@ -10,7 +11,7 @@
 		   <span class="glyphicon" *ngFor="let value of [1,2,3,4,5]"
 		      [ngClass]="{ 'glyphicon-star': movie.rating >= value, 'glyphicon-star-empty': (movie.rating||0) < value }"
 		      (click)="movie.rating = value"></span>
-			<span class="badge">{{movie.rating || 0}}/5</span>
+		<span class="badge">{{movie.rating || 0}}/5</span>
 		</span>
 	</div>
 </div>
