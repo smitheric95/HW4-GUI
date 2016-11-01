@@ -9,6 +9,7 @@ import { MovieRepositoryService } from '../repositories/movie-repository.service
 })
 export class MovieEditorComponent {
     movie: any;
+    years: number[];
 
     constructor(private route: ActivatedRoute,
         private router: Router,
@@ -16,6 +17,8 @@ export class MovieEditorComponent {
 
     ngOnInit() {
         this.movie = {}
+        this.years = Array.from(new Array(117), (x,i) => i+1900);
+        this.years.reverse();
     }
 
     save() {

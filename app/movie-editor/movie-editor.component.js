@@ -19,6 +19,8 @@ var MovieEditorComponent = (function () {
     }
     MovieEditorComponent.prototype.ngOnInit = function () {
         this.movie = {};
+        this.years = Array.from(new Array(117), function (x, i) { return i + 1900; });
+        this.years.reverse();
     };
     MovieEditorComponent.prototype.save = function () {
         this.movieRepositoryService.add(this.movie);
