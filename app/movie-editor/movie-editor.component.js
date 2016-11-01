@@ -9,11 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
+var movie_repository_service_1 = require('../repositories/movie-repository.service');
 var MovieEditorComponent = (function () {
-    function MovieEditorComponent() {
+    function MovieEditorComponent(route, router, movieRepositoryService) {
+        this.route = route;
+        this.router = router;
+        this.movieRepositoryService = movieRepositoryService;
     }
-    MovieEditorComponent.prototype.onSubmit = function (form) {
-        console.log(form);
+    MovieEditorComponent.prototype.ngOnInit = function () {
+        this.movie = {};
+    };
+    MovieEditorComponent.prototype.save = function () {
+        this.movieRepositoryService.add(this.movie);
+        this.router.navigateByUrl('');
     };
     MovieEditorComponent = __decorate([
         core_1.Component({
@@ -21,7 +30,7 @@ var MovieEditorComponent = (function () {
             templateUrl: './app/movie-editor/movie-editor.html',
             styleUrls: ['./app/movie-editor/movie-editor.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, router_1.Router, movie_repository_service_1.MovieRepositoryService])
     ], MovieEditorComponent);
     return MovieEditorComponent;
 }());
