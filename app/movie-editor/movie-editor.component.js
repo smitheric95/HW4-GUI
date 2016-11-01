@@ -21,6 +21,8 @@ var MovieEditorComponent = (function () {
         this.movie = {};
         this.years = Array.from(new Array(117), function (x, i) { return i + 1900; });
         this.years.reverse();
+        this.route.params.forEach(function (params) {
+        });
     };
     MovieEditorComponent.prototype.save = function () {
         this.movieRepositoryService.add(this.movie);
