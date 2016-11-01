@@ -10,7 +10,10 @@
 				[routerLink]="['edit', movie.id]"
 				class="glyphicon glyphicon-edit text-primary" 
 			></a>
-			<i class="glyphicon glyphicon-trash text-danger"></i>
+			<i
+				(click)="delete(movie.id)" 
+				class="glyphicon glyphicon-trash text-danger"
+			></i>
 		</h4>
 		<span class="rating">
 			<rating [model]="movie.rating"></rating>

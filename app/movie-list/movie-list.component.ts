@@ -10,7 +10,11 @@ import { MovieRepositoryService } from '../repositories/movie-repository.service
 export class MovieListComponent { 
 	movies : any[];
 
-	constructor(private movieRepository : MovieRepositoryService){
-		this.movies = this.movieRepository.list();
+	constructor(private movieRepositoryService : MovieRepositoryService){
+		this.movies = this.movieRepositoryService.list();
+	}
+
+	delete(movie){
+		this.movieRepositoryService.delete(movie);
 	}
 }
