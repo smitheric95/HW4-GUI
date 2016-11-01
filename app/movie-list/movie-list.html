@@ -6,6 +6,8 @@
 	<div class="media-body">
 		<h4 class="media-heading">
 			{{ movie.title }} ({{ movie.year }})
+			<i class="glyphicon glyphicon-edit text-primary"></i>
+			<i class="glyphicon glyphicon-trash text-danger"></i>
 		</h4>
 		<span class="rating">
 			<rating [model]="movie.rating"></rating>

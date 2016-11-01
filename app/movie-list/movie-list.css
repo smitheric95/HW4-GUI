@@ -12,3 +12,15 @@
 	right: 50px;
 	top: 50px;
 }
+
+.glyphicon-edit, .glyphicon-trash{
+	font-size: 12px;
+	padding: 5px;
+	margin-top: -25px;
+	cursor: pointer;
+	opacity: 0.7;
+}
+
+.glyphicon-edit:hover, .glyphicon-trash:hover{
+	opacity: 1;	
+}
