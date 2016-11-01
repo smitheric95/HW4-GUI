@@ -10,25 +10,30 @@ import { MovieRepositoryService } from '../repositories/movie-repository.service
 export class MovieEditorComponent {
     movie: any;
     years: number[];
-
+    isAdding: boolean;
+    
     constructor(private route: ActivatedRoute,
         private router: Router,
         private movieRepositoryService: MovieRepositoryService) { }
 
     ngOnInit() {
         this.movie = {};
-        this.years = Array.from(new Array(117), (x,i) => i+1900);
-        this.years.reverse();
+        this.years = Array(50).fill(0).map((x,i)=>(new Date().getFullYear()-i));
+        this.isAdding = true;
 
         this.route.params.forEach((params: Params) => {
             if(params['id'] !== undefined){
                 this.movie = this.movieRepositoryService.get(+params['id']);
+                this.isAdding = false;
             }
         });
     }
 
     save() {
-        this.movieRepositoryService.add(this.movie);
+        if(this.isAdding == true)
+            this.movieRepositoryService.add(this.movie);
+        else
+            this.movieRepositoryService.update(this.movie);
         this.router.navigateByUrl('');
     }
 }

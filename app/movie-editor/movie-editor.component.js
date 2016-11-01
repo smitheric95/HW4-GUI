@@ -20,16 +20,20 @@ var MovieEditorComponent = (function () {
     MovieEditorComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.movie = {};
-        this.years = Array.from(new Array(117), function (x, i) { return i + 1900; });
-        this.years.reverse();
+        this.years = Array(50).fill(0).map(function (x, i) { return (new Date().getFullYear() - i); });
+        this.isAdding = true;
         this.route.params.forEach(function (params) {
             if (params['id'] !== undefined) {
                 _this.movie = _this.movieRepositoryService.get(+params['id']);
+                _this.isAdding = false;
             }
         });
     };
     MovieEditorComponent.prototype.save = function () {
-        this.movieRepositoryService.add(this.movie);
+        if (this.isAdding == true)
+            this.movieRepositoryService.add(this.movie);
+        else
+            this.movieRepositoryService.update(this.movie);
         this.router.navigateByUrl('');
     };
     MovieEditorComponent = __decorate([
