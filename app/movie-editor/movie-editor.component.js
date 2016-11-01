@@ -18,10 +18,14 @@ var MovieEditorComponent = (function () {
         this.movieRepositoryService = movieRepositoryService;
     }
     MovieEditorComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.movie = {};
         this.years = Array.from(new Array(117), function (x, i) { return i + 1900; });
         this.years.reverse();
         this.route.params.forEach(function (params) {
+            if (params['id'] !== undefined) {
+                _this.movie = _this.movieRepositoryService.get(+params['id']);
+            }
         });
     };
     MovieEditorComponent.prototype.save = function () {

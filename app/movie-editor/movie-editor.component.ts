@@ -16,12 +16,14 @@ export class MovieEditorComponent {
         private movieRepositoryService: MovieRepositoryService) { }
 
     ngOnInit() {
-        this.movie = {}
+        this.movie = {};
         this.years = Array.from(new Array(117), (x,i) => i+1900);
         this.years.reverse();
 
         this.route.params.forEach((params: Params) => {
-            
+            if(params['id'] !== undefined){
+                this.movie = this.movieRepositoryService.get(+params['id']);
+            }
         });
     }
 
