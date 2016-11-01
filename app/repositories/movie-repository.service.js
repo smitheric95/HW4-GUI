@@ -25,6 +25,8 @@ var MovieRepositoryService = (function () {
         return -1;
     };
     MovieRepositoryService.prototype.list = function () {
+        for (var i = this._movies.length; i--;)
+            this._movies[i].rating = 0;
         return this._movies;
     };
     MovieRepositoryService.prototype.get = function (id) {
@@ -33,6 +35,7 @@ var MovieRepositoryService = (function () {
     };
     MovieRepositoryService.prototype.add = function (movie) {
         movie.id = this._movies.length + 1;
+        movie.rating = 0;
         this._movies.push(movie);
     };
     MovieRepositoryService.prototype.update = function (movie) {

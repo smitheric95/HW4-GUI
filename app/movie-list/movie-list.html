@@ -8,10 +8,7 @@
 			{{ movie.title }} ({{ movie.year }})
 		</h4>
 		<span class="rating">
-		   <span class="glyphicon" *ngFor="let value of [1,2,3,4,5]"
-		      [ngClass]="{ 'glyphicon-star': movie.rating >= value, 'glyphicon-star-empty': (movie.rating||0) < value }"
-		      (click)="movie.rating = value"></span>
-		<span class="badge">{{movie.rating || 0}}/5</span>
+			<rating [model]="movie.rating"></rating>
 		</span>
 	</div>
 </div>

@@ -7,6 +7,7 @@ import { AppComponent }   from './app.component';
 import { MovieRepositoryService } from './repositories/movie-repository.service';
 import { MovieEditorComponent }   from './movie-editor/movie-editor.component';
 import { MovieListComponent }   from './movie-list/movie-list.component';
+import { RatingComponent }   from './rating/rating.component';
 
 @NgModule({
   imports:      [ 
@@ -21,7 +22,8 @@ import { MovieListComponent }   from './movie-list/movie-list.component';
   declarations: [
   	AppComponent,
   	MovieListComponent,
-    MovieEditorComponent
+    MovieEditorComponent,
+    RatingComponent
   ],
   providers: [ MovieRepositoryService ],
   bootstrap:    [ AppComponent ]

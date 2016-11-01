@@ -16,6 +16,7 @@ var app_component_1 = require('./app.component');
 var movie_repository_service_1 = require('./repositories/movie-repository.service');
 var movie_editor_component_1 = require('./movie-editor/movie-editor.component');
 var movie_list_component_1 = require('./movie-list/movie-list.component');
+var rating_component_1 = require('./rating/rating.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -33,7 +34,8 @@ var AppModule = (function () {
             declarations: [
                 app_component_1.AppComponent,
                 movie_list_component_1.MovieListComponent,
-                movie_editor_component_1.MovieEditorComponent
+                movie_editor_component_1.MovieEditorComponent,
+                rating_component_1.RatingComponent
             ],
             providers: [movie_repository_service_1.MovieRepositoryService],
             bootstrap: [app_component_1.AppComponent]
