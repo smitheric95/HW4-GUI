@@ -21,8 +21,6 @@ export class MovieRepositoryService {
 	}
 
 	public list() : any[] {
-		for (var i = this._movies.length; i--;) 
-			this._movies[i].rating = 0;
 		return this._movies;
 	}
 
@@ -33,7 +31,8 @@ export class MovieRepositoryService {
 
 	public add(movie) {
 		movie.id = this._movies.length + 1;
-		movie.rating = 0;
+		if(movie.imagePath == null)
+			movie.imagePath = "images/blank.jpg"
 		this._movies.push(movie);
 	}
 
