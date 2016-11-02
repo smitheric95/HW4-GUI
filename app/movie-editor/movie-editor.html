@@ -17,13 +17,14 @@
 					<label for="movie_year">
                         Year
                     </label>
-					<select
-						id="movie_year" 
+					<input 
                         class="form-control" 
-                        [(ngModel)]="movie.year"
+                        [(ngModel)]="movie.year" list="movie_year" name="movie_year">
+					<datalist
+						id="movie_year" 
 					>
-					<option *ngFor="let number of years">{{number}}</option>
-					</select>
+					<option *ngFor="let number of years" value="{{number}}">
+					</datalist>
 				</div>
 				<br />
 				<div class="form-group">
