@@ -22,10 +22,12 @@ var MovieEditorComponent = (function () {
         this.movie = {};
         this.years = Array(50).fill(0).map(function (x, i) { return (new Date().getFullYear() - i); });
         this.isAdding = true;
+        this.title = "New Movie";
         this.route.params.forEach(function (params) {
             if (params['id'] !== undefined) {
                 _this.movie = _this.movieRepositoryService.get(+params['id']);
                 _this.isAdding = false;
+                _this.title = _this.movie.title;
             }
         });
     };

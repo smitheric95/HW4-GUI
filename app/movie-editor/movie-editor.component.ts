@@ -11,7 +11,8 @@ export class MovieEditorComponent {
     movie: any;
     years: number[];
     isAdding: boolean;
-    
+    title: string;
+
     constructor(private route: ActivatedRoute,
         private router: Router,
         private movieRepositoryService: MovieRepositoryService) { }
@@ -20,11 +21,13 @@ export class MovieEditorComponent {
         this.movie = {};
         this.years = Array(50).fill(0).map((x,i)=>(new Date().getFullYear()-i));
         this.isAdding = true;
-
+        this.title = "New Movie";
+        
         this.route.params.forEach((params: Params) => {
             if(params['id'] !== undefined){
                 this.movie = this.movieRepositoryService.get(+params['id']);
                 this.isAdding = false;
+                this.title = this.movie.title;
             }
         });
     }
