@@ -15,6 +15,8 @@ var MovieRepositoryService = (function () {
         this._movies.push({ id: 1, title: 'Batman', year: 1988, imagePath: 'images/shining.jpg' });
         this._movies.push({ id: 2, title: 'Home Alone', year: 1990, imagePath: 'images/nemo.jpg' });
         this._movies.push({ id: 3, title: 'Titanic', year: 1996, imagePath: 'images/hungergames.jpg' });
+        for (var i = 0; i < this._movies.length; i++)
+            this._movies[i].rating = 0;
     }
     MovieRepositoryService.prototype.getIndex = function (id) {
         for (var i = this._movies.length; i--;) {

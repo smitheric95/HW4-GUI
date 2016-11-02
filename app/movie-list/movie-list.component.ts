@@ -17,4 +17,5 @@ export class MovieListComponent {
 	delete(movie){
 		this.movieRepositoryService.delete(movie);
 	}
+
 }

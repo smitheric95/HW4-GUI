@@ -12,9 +12,6 @@ var core_1 = require('@angular/core');
 var RatingComponent = (function () {
     function RatingComponent() {
     }
-    RatingComponent.prototype.ngOnInit = function () {
-        this.model = 0;
-    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -22,7 +19,7 @@ var RatingComponent = (function () {
     RatingComponent = __decorate([
         core_1.Component({
             selector: 'rating',
-            template: "\n        <span class=\"glyphicon\" *ngFor=\"let value of [1,2,3,4,5]\"\n\t\t      [ngClass]=\"{ 'glyphicon-star': this.model >= value, 'glyphicon-star-empty': (this.model||0) < value }\"\n\t\t      (click)=\"this.model = value\"></span>\n\t\t<span class=\"badge\">{{this.model || 0}}/5</span>\n    "
+            template: "\n        <span class=\"glyphicon\" *ngFor=\"let value of [1,2,3,4,5]\"\n\t\t      [ngClass]=\"{ 'glyphicon-star': this.model.rating >= value, 'glyphicon-star-empty': (this.model.rating||0) < value }\"\n\t\t      (click)=\"this.model.rating = value\"></span>\n\t\t<span class=\"badge\">{{this.model.rating || 0}}/5</span>\n    "
         }), 
         __metadata('design:paramtypes', [])
     ], RatingComponent);
