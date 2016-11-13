@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Http, Headers, Response } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class MovieRepositoryService {
+	private _apiUrl  = 'app';
 
 	private _movies: any[];
+
+	constructor(private http: Http){}
 
 	private getIndex(id : number){
 		for (var i = this._movies.length; i--;) {
@@ -13,39 +18,45 @@ export class MovieRepositoryService {
 		return -1;
 	}
 
-	constructor(){
-		this._movies = [];
-		this._movies.push({ id: 1, title: 'Batman', year: 1988, imagePath: 'images/shining.jpg' });
-		this._movies.push({ id: 2, title: 'Home Alone', year: 1990, imagePath: 'images/nemo.jpg' });
-		this._movies.push({ id: 3, title: 'Titanic', year: 1996, imagePath: 'images/hungergames.jpg' });
-
-		for(var i=0; i < this._movies.length;i++)
-			this._movies[i].rating = 0;
+	list() : Promise<any[]> {
+		return this.http.get(this._apiUrl)
+		.toPromise()
+		.then(x => x.json().data as any[]);
 	}
 
-	public list() : any[] {
-		return this._movies;
+	get(id : number) : Promise<any> {
+		var pluck = x => (x && x.length) ? x[0] : undefined;
+		return this.http
+			.get(`${this._apiUrl}/?id=${id}`)
+			.toPromise()
+			.then(x => pluck(x.json().data))
+			.catch(x => alert(x.json().error));
 	}
 
-	public get(id : number) : any {
-		var index = this.getIndex(id);
-		return this._movies[index];
+//		if(movie.imagePath == null)
+//			movie.imagePath = "images/blank.jpg"
+	add(movie) : Promise<any> {
+		return this.http
+			.post(this._apiUrl, movie)
+			.toPromise()
+			.then(() => movie)
+			.catch(x => alert(x.json().error));
 	}
 
-	public add(movie) {
-		movie.id = this._movies.length + 1;
-		if(movie.imagePath == null)
-			movie.imagePath = "images/blank.jpg"
-		this._movies.push(movie);
-	}
 
-	public update(movie) {
-		var index = this.getIndex(movie.id);
-		this._movies[index] = movie;
+	update(movie) : Promise<any> {
+		return this.http
+			.put(`${this._apiUrl}/${movie.id}`, movie)
+			.toPromise()
+			.then(() => movie)
+			.catch(x => alert(x.json().error));
 	}
-
-	public delete(id : number) {
-		var index = this.getIndex(id);
-		this._movies.splice(index, 1);
+/*
+	delete(movie) : Promise<void> {
+		return this.http
+			.delete(`${this._apiUrl}/${movie.id}`, movie)
+			.toPromise()
+			.catch(x => alert(x.json().error));
 	}
+	*/
 }

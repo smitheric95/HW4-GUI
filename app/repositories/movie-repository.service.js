@@ -9,14 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var http_1 = require('@angular/http');
+require('rxjs/add/operator/toPromise');
 var MovieRepositoryService = (function () {
-    function MovieRepositoryService() {
-        this._movies = [];
-        this._movies.push({ id: 1, title: 'Batman', year: 1988, imagePath: 'images/shining.jpg' });
-        this._movies.push({ id: 2, title: 'Home Alone', year: 1990, imagePath: 'images/nemo.jpg' });
-        this._movies.push({ id: 3, title: 'Titanic', year: 1996, imagePath: 'images/hungergames.jpg' });
-        for (var i = 0; i < this._movies.length; i++)
-            this._movies[i].rating = 0;
+    function MovieRepositoryService(http) {
+        this.http = http;
+        this._apiUrl = 'app';
     }
     MovieRepositoryService.prototype.getIndex = function (id) {
         for (var i = this._movies.length; i--;) {
@@ -27,29 +25,37 @@ var MovieRepositoryService = (function () {
         return -1;
     };
     MovieRepositoryService.prototype.list = function () {
-        return this._movies;
+        return this.http.get(this._apiUrl)
+            .toPromise()
+            .then(function (x) { return x.json().data; });
     };
     MovieRepositoryService.prototype.get = function (id) {
-        var index = this.getIndex(id);
-        return this._movies[index];
+        var pluck = function (x) { return (x && x.length) ? x[0] : undefined; };
+        return this.http
+            .get(this._apiUrl + "/?id=" + id)
+            .toPromise()
+            .then(function (x) { return pluck(x.json().data); })
+            .catch(function (x) { return alert(x.json().error); });
     };
+    //		if(movie.imagePath == null)
+    //			movie.imagePath = "images/blank.jpg"
     MovieRepositoryService.prototype.add = function (movie) {
-        movie.id = this._movies.length + 1;
-        if (movie.imagePath == null)
-            movie.imagePath = "images/blank.jpg";
-        this._movies.push(movie);
+        return this.http
+            .post(this._apiUrl, movie)
+            .toPromise()
+            .then(function () { return movie; })
+            .catch(function (x) { return alert(x.json().error); });
     };
     MovieRepositoryService.prototype.update = function (movie) {
-        var index = this.getIndex(movie.id);
-        this._movies[index] = movie;
-    };
-    MovieRepositoryService.prototype.delete = function (id) {
-        var index = this.getIndex(id);
-        this._movies.splice(index, 1);
+        return this.http
+            .put(this._apiUrl + "/" + movie.id, movie)
+            .toPromise()
+            .then(function () { return movie; })
+            .catch(function (x) { return alert(x.json().error); });
     };
     MovieRepositoryService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [http_1.Http])
     ], MovieRepositoryService);
     return MovieRepositoryService;
 }());

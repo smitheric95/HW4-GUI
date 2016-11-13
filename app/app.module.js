@@ -12,11 +12,14 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var router_1 = require('@angular/router');
 var forms_1 = require('@angular/forms');
+var http_1 = require('@angular/http');
+var angular_in_memory_web_api_1 = require('angular-in-memory-web-api');
 var app_component_1 = require('./app.component');
 var movie_repository_service_1 = require('./repositories/movie-repository.service');
 var movie_editor_component_1 = require('./movie-editor/movie-editor.component');
 var movie_list_component_1 = require('./movie-list/movie-list.component');
 var rating_component_1 = require('./rating/rating.component');
+var mock_api_service_1 = require('./mock-api.service');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -25,11 +28,13 @@ var AppModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
+                http_1.HttpModule,
                 router_1.RouterModule.forRoot([
                     { path: '', component: movie_list_component_1.MovieListComponent },
                     { path: 'add', component: movie_editor_component_1.MovieEditorComponent },
                     { path: 'edit/:id', component: movie_editor_component_1.MovieEditorComponent }
-                ])
+                ]),
+                angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(mock_api_service_1.MockApiService)
             ],
             declarations: [
                 app_component_1.AppComponent,

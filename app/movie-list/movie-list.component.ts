@@ -10,6 +10,12 @@ import { MovieRepositoryService } from '../repositories/movie-repository.service
 export class MovieListComponent { 
 	movies : any[];
 
+	constructor(private moviesService : MovieRepositoryService){
+		moviesService.list()
+			.then(x => this.movies = x);
+	}
+
+/*
 	constructor(private movieRepositoryService : MovieRepositoryService){
 		this.movies = this.movieRepositoryService.list();
 	}
@@ -17,5 +23,5 @@ export class MovieListComponent {
 	delete(movie){
 		this.movieRepositoryService.delete(movie);
 	}
-
+*/
 }

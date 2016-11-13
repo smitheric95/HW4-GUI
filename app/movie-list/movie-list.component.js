@@ -11,13 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var movie_repository_service_1 = require('../repositories/movie-repository.service');
 var MovieListComponent = (function () {
-    function MovieListComponent(movieRepositoryService) {
-        this.movieRepositoryService = movieRepositoryService;
-        this.movies = this.movieRepositoryService.list();
+    function MovieListComponent(moviesService) {
+        var _this = this;
+        this.moviesService = moviesService;
+        moviesService.list()
+            .then(function (x) { return _this.movies = x; });
     }
-    MovieListComponent.prototype.delete = function (movie) {
-        this.movieRepositoryService.delete(movie);
-    };
     MovieListComponent = __decorate([
         core_1.Component({
             selector: 'movie-list',

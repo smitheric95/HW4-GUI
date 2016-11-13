@@ -23,7 +23,7 @@ export class MovieEditorComponent {
         this.isAdding = true;
         this.title = "New Movie";
         
-        this.route.params.forEach((params: Params) => {
+        this.route.params.forEach(params => {
             if(params['id'] !== undefined){
                 this.movie = this.movieRepositoryService.get(+params['id']);
                 this.isAdding = false;
