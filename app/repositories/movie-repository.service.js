@@ -14,16 +14,19 @@ require('rxjs/add/operator/toPromise');
 var MovieRepositoryService = (function () {
     function MovieRepositoryService(http) {
         this.http = http;
-        this._apiUrl = 'app';
+        this._apiUrl = 'app/movies';
     }
-    MovieRepositoryService.prototype.getIndex = function (id) {
-        for (var i = this._movies.length; i--;) {
-            var movie = this._movies[i];
-            if (movie.id == id)
-                return i;
+    /*
+        private _movies: any[];
+    
+        private getIndex(id : number){
+            for (var i = this._movies.length; i--;) {
+                var movie = this._movies[i];
+                if(movie.id == id) return i;
+            }
+            return -1;
         }
-        return -1;
-    };
+    */
     MovieRepositoryService.prototype.list = function () {
         return this.http.get(this._apiUrl)
             .toPromise()

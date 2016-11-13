@@ -4,11 +4,12 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class MovieRepositoryService {
-	private _apiUrl  = 'app';
-
-	private _movies: any[];
+	private _apiUrl  = 'app/movies';
 
 	constructor(private http: Http){}
+
+/*
+	private _movies: any[];
 
 	private getIndex(id : number){
 		for (var i = this._movies.length; i--;) {
@@ -17,7 +18,7 @@ export class MovieRepositoryService {
 		}
 		return -1;
 	}
-
+*/
 	list() : Promise<any[]> {
 		return this.http.get(this._apiUrl)
 		.toPromise()

@@ -14,8 +14,8 @@ var MovieListComponent = (function () {
     function MovieListComponent(moviesService) {
         var _this = this;
         this.moviesService = moviesService;
-        moviesService.list()
-            .then(function (x) { return _this.movies = x; });
+        this.movies = [];
+        moviesService.list().then(function (x) { return _this.movies = x; });
     }
     MovieListComponent = __decorate([
         core_1.Component({

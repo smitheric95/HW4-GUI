@@ -11,8 +11,9 @@ export class MovieListComponent {
 	movies : any[];
 
 	constructor(private moviesService : MovieRepositoryService){
-		moviesService.list()
-			.then(x => this.movies = x);
+		this.movies = [];
+
+		moviesService.list().then(x => this.movies = x);
 	}
 
 /*
