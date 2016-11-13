@@ -23,9 +23,7 @@ export class MovieRepositoryService {
 			.then(x => pluck(x.json().data))
 			.catch(x => alert(x.json().error));
 	}
-/*
-//		if(movie.imagePath == null)
-//			movie.imagePath = "images/blank.jpg"
+
 	add(movie) : Promise<any> {
 		return this.http
 			.post(this._apiUrl, movie)
@@ -34,7 +32,6 @@ export class MovieRepositoryService {
 			.catch(x => alert(x.json().error));
 	}
 
-
 	update(movie) : Promise<any> {
 		return this.http
 			.put(`${this._apiUrl}/${movie.id}`, movie)
@@ -42,7 +39,6 @@ export class MovieRepositoryService {
 			.then(() => movie)
 			.catch(x => alert(x.json().error));
 	}
-*/
 
 	delete(movie) : Promise<any> {
 		return this.http

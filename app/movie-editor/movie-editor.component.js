@@ -31,6 +31,16 @@ var MovieEditorComponent = (function () {
             }
         });
     };
+    MovieEditorComponent.prototype.save = function () {
+        if (this.isAdding == true) {
+            if (this.movie.imagePath == null)
+                this.movie.imagePath = "images/blank.jpg";
+            this.movieRepositoryService.add(this.movie);
+        }
+        else
+            this.movieRepositoryService.update(this.movie);
+        this.router.navigateByUrl('');
+    };
     MovieEditorComponent = __decorate([
         core_1.Component({
             selector: 'movie-editor',

@@ -29,26 +29,20 @@ var MovieRepositoryService = (function () {
             .then(function (x) { return pluck(x.json().data); })
             .catch(function (x) { return alert(x.json().error); });
     };
-    /*
-    //		if(movie.imagePath == null)
-    //			movie.imagePath = "images/blank.jpg"
-        add(movie) : Promise<any> {
-            return this.http
-                .post(this._apiUrl, movie)
-                .toPromise()
-                .then(() => movie)
-                .catch(x => alert(x.json().error));
-        }
-    
-    
-        update(movie) : Promise<any> {
-            return this.http
-                .put(`${this._apiUrl}/${movie.id}`, movie)
-                .toPromise()
-                .then(() => movie)
-                .catch(x => alert(x.json().error));
-        }
-    */
+    MovieRepositoryService.prototype.add = function (movie) {
+        return this.http
+            .post(this._apiUrl, movie)
+            .toPromise()
+            .then(function () { return movie; })
+            .catch(function (x) { return alert(x.json().error); });
+    };
+    MovieRepositoryService.prototype.update = function (movie) {
+        return this.http
+            .put(this._apiUrl + "/" + movie.id, movie)
+            .toPromise()
+            .then(function () { return movie; })
+            .catch(function (x) { return alert(x.json().error); });
+    };
     MovieRepositoryService.prototype.delete = function (movie) {
         return this.http
             .delete(this._apiUrl + "/" + movie.id, movie)
