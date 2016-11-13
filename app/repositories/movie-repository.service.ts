@@ -8,23 +8,13 @@ export class MovieRepositoryService {
 
 	constructor(private http: Http){}
 
-/*
-	private _movies: any[];
-
-	private getIndex(id : number){
-		for (var i = this._movies.length; i--;) {
-			var movie = this._movies[i];
-			if(movie.id == id) return i;
-		}
-		return -1;
-	}
-*/
 	list() : Promise<any[]> {
 		return this.http.get(this._apiUrl)
 		.toPromise()
 		.then(x => x.json().data as any[]);
 	}
 
+/*
 	get(id : number) : Promise<any> {
 		var pluck = x => (x && x.length) ? x[0] : undefined;
 		return this.http
@@ -52,12 +42,13 @@ export class MovieRepositoryService {
 			.then(() => movie)
 			.catch(x => alert(x.json().error));
 	}
-/*
+*/
+
 	delete(movie) : Promise<void> {
 		return this.http
 			.delete(`${this._apiUrl}/${movie.id}`, movie)
 			.toPromise()
 			.catch(x => alert(x.json().error));
 	}
-	*/
+	
 }

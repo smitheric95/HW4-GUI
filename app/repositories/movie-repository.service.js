@@ -16,44 +16,44 @@ var MovieRepositoryService = (function () {
         this.http = http;
         this._apiUrl = 'app/movies';
     }
-    /*
-        private _movies: any[];
-    
-        private getIndex(id : number){
-            for (var i = this._movies.length; i--;) {
-                var movie = this._movies[i];
-                if(movie.id == id) return i;
-            }
-            return -1;
-        }
-    */
     MovieRepositoryService.prototype.list = function () {
         return this.http.get(this._apiUrl)
             .toPromise()
             .then(function (x) { return x.json().data; });
     };
-    MovieRepositoryService.prototype.get = function (id) {
-        var pluck = function (x) { return (x && x.length) ? x[0] : undefined; };
-        return this.http
-            .get(this._apiUrl + "/?id=" + id)
-            .toPromise()
-            .then(function (x) { return pluck(x.json().data); })
-            .catch(function (x) { return alert(x.json().error); });
-    };
+    /*
+        get(id : number) : Promise<any> {
+            var pluck = x => (x && x.length) ? x[0] : undefined;
+            return this.http
+                .get(`${this._apiUrl}/?id=${id}`)
+                .toPromise()
+                .then(x => pluck(x.json().data))
+                .catch(x => alert(x.json().error));
+        }
+    
     //		if(movie.imagePath == null)
     //			movie.imagePath = "images/blank.jpg"
-    MovieRepositoryService.prototype.add = function (movie) {
+        add(movie) : Promise<any> {
+            return this.http
+                .post(this._apiUrl, movie)
+                .toPromise()
+                .then(() => movie)
+                .catch(x => alert(x.json().error));
+        }
+    
+    
+        update(movie) : Promise<any> {
+            return this.http
+                .put(`${this._apiUrl}/${movie.id}`, movie)
+                .toPromise()
+                .then(() => movie)
+                .catch(x => alert(x.json().error));
+        }
+    */
+    MovieRepositoryService.prototype.delete = function (movie) {
         return this.http
-            .post(this._apiUrl, movie)
+            .delete(this._apiUrl + "/" + movie.id, movie)
             .toPromise()
-            .then(function () { return movie; })
-            .catch(function (x) { return alert(x.json().error); });
-    };
-    MovieRepositoryService.prototype.update = function (movie) {
-        return this.http
-            .put(this._apiUrl + "/" + movie.id, movie)
-            .toPromise()
-            .then(function () { return movie; })
             .catch(function (x) { return alert(x.json().error); });
     };
     MovieRepositoryService = __decorate([

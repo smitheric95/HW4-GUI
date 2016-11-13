@@ -1,6 +1,6 @@
 <h1>Movie Database</h1>
 <a class="btn btn-primary" routerLink="/add">Add Movie</a>
-<div class="media" *ngFor="let movie of movies">
+<div class="media" *ngFor="let movie of movies" [hidden]="movie.hide">
 	<span class="media-left">
 		<img [src]="movie.imagePath" alt="{{ movie.title }}" />
 	</span>
@@ -12,7 +12,7 @@
 				class="glyphicon glyphicon-edit text-primary" 
 			></a>
 			<i
-				(click)="delete(movie.id)" 
+				(click)="movie.hide = !movie.hide; delete(movie)" 
 				class="glyphicon glyphicon-trash text-danger"
 			></i>
 		</h4>

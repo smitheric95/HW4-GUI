@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { MovieRepositoryService } from '../repositories/movie-repository.service';
 
 @Component({
@@ -10,19 +11,23 @@ import { MovieRepositoryService } from '../repositories/movie-repository.service
 export class MovieListComponent { 
 	movies : any[];
 
-	constructor(private moviesService : MovieRepositoryService){
+	constructor(private route: ActivatedRoute,
+				private router: Router,
+				private movieRepositoryService : MovieRepositoryService){
 		this.movies = [];
 
-		moviesService.list().then(x => this.movies = x);
-	}
-
-/*
-	constructor(private movieRepositoryService : MovieRepositoryService){
-		this.movies = this.movieRepositoryService.list();
+		movieRepositoryService.list().then(x => this.movies = x);
 	}
 
 	delete(movie){
-		this.movieRepositoryService.delete(movie);
+		this.movieRepositoryService.delete(movie)
+			.then(() => this.returnToList(`Movie has been deleted!`));
+		
 	}
-*/
+
+	private returnToList(message){
+		this.router.navigateByUrl('')
+			.then(() => alert(message));
+	}
+
 }
