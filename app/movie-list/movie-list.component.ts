@@ -21,7 +21,7 @@ export class MovieListComponent {
 
 	delete(movie){
 		this.movieRepositoryService.delete(movie)
-			.then(() => this.returnToList(`Movie has been deleted!`));
+			.then(() => this.returnToList(`${movie.title} has been deleted!`));
 		
 	}
 

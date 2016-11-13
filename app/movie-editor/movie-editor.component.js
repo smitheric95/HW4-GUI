@@ -25,18 +25,11 @@ var MovieEditorComponent = (function () {
         this.title = "New Movie";
         this.route.params.forEach(function (params) {
             if (params['id'] !== undefined) {
-                _this.movie = _this.movieRepositoryService.get(+params['id']);
+                _this.movieRepositoryService.get(+params['id']).then(function (data) { _this.movie = data; });
                 _this.isAdding = false;
                 _this.title = _this.movie.title;
             }
         });
-    };
-    MovieEditorComponent.prototype.save = function () {
-        if (this.isAdding == true)
-            this.movieRepositoryService.add(this.movie);
-        else
-            this.movieRepositoryService.update(this.movie);
-        this.router.navigateByUrl('');
     };
     MovieEditorComponent = __decorate([
         core_1.Component({

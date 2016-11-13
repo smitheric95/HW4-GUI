@@ -21,16 +21,15 @@ var MovieRepositoryService = (function () {
             .toPromise()
             .then(function (x) { return x.json().data; });
     };
+    MovieRepositoryService.prototype.get = function (id) {
+        var pluck = function (x) { return (x && x.length) ? x[0] : undefined; };
+        return this.http
+            .get(this._apiUrl + "/?id=" + id)
+            .toPromise()
+            .then(function (x) { return pluck(x.json().data); })
+            .catch(function (x) { return alert(x.json().error); });
+    };
     /*
-        get(id : number) : Promise<any> {
-            var pluck = x => (x && x.length) ? x[0] : undefined;
-            return this.http
-                .get(`${this._apiUrl}/?id=${id}`)
-                .toPromise()
-                .then(x => pluck(x.json().data))
-                .catch(x => alert(x.json().error));
-        }
-    
     //		if(movie.imagePath == null)
     //			movie.imagePath = "images/blank.jpg"
         add(movie) : Promise<any> {

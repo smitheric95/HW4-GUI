@@ -23,7 +23,7 @@ var MovieListComponent = (function () {
     MovieListComponent.prototype.delete = function (movie) {
         var _this = this;
         this.movieRepositoryService.delete(movie)
-            .then(function () { return _this.returnToList("Movie has been deleted!"); });
+            .then(function () { return _this.returnToList(movie.title + " has been deleted!"); });
     };
     MovieListComponent.prototype.returnToList = function (message) {
         this.router.navigateByUrl('')

@@ -14,7 +14,7 @@ export class MovieRepositoryService {
 		.then(x => x.json().data as any[]);
 	}
 
-/*
+
 	get(id : number) : Promise<any> {
 		var pluck = x => (x && x.length) ? x[0] : undefined;
 		return this.http
@@ -23,7 +23,7 @@ export class MovieRepositoryService {
 			.then(x => pluck(x.json().data))
 			.catch(x => alert(x.json().error));
 	}
-
+/*
 //		if(movie.imagePath == null)
 //			movie.imagePath = "images/blank.jpg"
 	add(movie) : Promise<any> {
@@ -44,7 +44,7 @@ export class MovieRepositoryService {
 	}
 */
 
-	delete(movie) : Promise<void> {
+	delete(movie) : Promise<any> {
 		return this.http
 			.delete(`${this._apiUrl}/${movie.id}`, movie)
 			.toPromise()

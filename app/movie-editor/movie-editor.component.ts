@@ -19,24 +19,26 @@ export class MovieEditorComponent {
 
     ngOnInit() {
         this.movie = {};
-        this.years = Array(50).fill(0).map((x,i)=>(new Date().getFullYear()-i));
+        this.years = Array(50).fill(0).map((x, i) => (new Date().getFullYear() - i));
         this.isAdding = true;
         this.title = "New Movie";
-        
+
         this.route.params.forEach(params => {
-            if(params['id'] !== undefined){
-                this.movie = this.movieRepositoryService.get(+params['id']);
+            if (params['id'] !== undefined) {
+                this.movieRepositoryService.get(+params['id']).then((data) => {this.movie = data;});
+
                 this.isAdding = false;
                 this.title = this.movie.title;
             }
         });
     }
-
-    save() {
-        if(this.isAdding == true)
-            this.movieRepositoryService.add(this.movie);
-        else
-            this.movieRepositoryService.update(this.movie);
-        this.router.navigateByUrl('');
-    }
+    /*
+        save() {
+            if(this.isAdding == true)
+                this.movieRepositoryService.add(this.movie);
+            else
+                this.movieRepositoryService.update(this.movie);
+            this.router.navigateByUrl('');
+        }
+        */
 }
