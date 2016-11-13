@@ -21,13 +21,10 @@ var MovieListComponent = (function () {
         movieRepositoryService.list().then(function (x) { return _this.movies = x; });
     }
     MovieListComponent.prototype.delete = function (movie) {
-        var _this = this;
-        this.movieRepositoryService.delete(movie)
-            .then(function () { return _this.returnToList(movie.title + " has been deleted!"); });
-    };
-    MovieListComponent.prototype.returnToList = function (message) {
-        this.router.navigateByUrl('')
-            .then(function () { return alert(message); });
+        this.movieRepositoryService.delete(movie);
+        this.movies = this.movies.filter(function (obj) {
+            return obj.id !== movie.id;
+        });
     };
     MovieListComponent = __decorate([
         core_1.Component({

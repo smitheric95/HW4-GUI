@@ -14,7 +14,6 @@ export class MovieRepositoryService {
 		.then(x => x.json().data as any[]);
 	}
 
-
 	get(id : number) : Promise<any> {
 		var pluck = x => (x && x.length) ? x[0] : undefined;
 		return this.http
