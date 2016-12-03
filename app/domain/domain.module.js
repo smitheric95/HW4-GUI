@@ -9,31 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var platform_browser_1 = require('@angular/platform-browser');
-var http_1 = require('@angular/http');
-var app_component_1 = require('./app.component');
-var domain_module_1 = require('./domain/domain.module');
-var movies_module_1 = require('./movies/movies.module');
-var AppModule = (function () {
-    function AppModule() {
+var movie_repository_service_1 = require('./movies/movie-repository.service');
+var DomainModule = (function () {
+    function DomainModule() {
     }
-    AppModule = __decorate([
+    DomainModule = __decorate([
         core_1.NgModule({
-            imports: [
-                domain_module_1.DomainModule,
-                platform_browser_1.BrowserModule,
-                http_1.HttpModule,
-                movies_module_1.MoviesModule
-            ],
-            declarations: [
-                app_component_1.AppComponent
-            ],
-            providers: [],
-            bootstrap: [app_component_1.AppComponent]
+            id: 'domain',
+            providers: [
+                movie_repository_service_1.MovieRepositoryService
+            ]
         }), 
         __metadata('design:paramtypes', [])
-    ], AppModule);
-    return AppModule;
+    ], DomainModule);
+    return DomainModule;
 }());
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+exports.DomainModule = DomainModule;
+//# sourceMappingURL=domain.module.js.map

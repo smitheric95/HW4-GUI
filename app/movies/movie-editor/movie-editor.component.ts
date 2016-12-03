@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { MovieRepositoryService } from '../repositories/movie-repository.service';
+import { MovieRepositoryService } from '../../domain/movies/movie-repository.service';
+import { Movie } from '../../domain/movies/movie';
 
 @Component({
     selector: 'movie-editor',
-    templateUrl: './app/movie-editor/movie-editor.html',
-    styleUrls: ['./app/movie-editor/movie-editor.css']
+    templateUrl: './app/movies/movie-editor/movie-editor.html',
+    styleUrls: ['./app/movies/movie-editor/movie-editor.css']
 })
 export class MovieEditorComponent {
-    movie: any;
+    @Input() movie: Movie;
     years: number[];
     isAdding: boolean;
     title: string;
@@ -18,7 +19,7 @@ export class MovieEditorComponent {
         private movieRepositoryService: MovieRepositoryService) { }
 
     ngOnInit() {
-        this.movie = {};
+        this.movie = new Movie();
         this.years = Array(50).fill(0).map((x, i) => (new Date().getFullYear() - i));
         this.isAdding = true;
 

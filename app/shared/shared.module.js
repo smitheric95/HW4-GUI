@@ -10,30 +10,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
-var http_1 = require('@angular/http');
-var app_component_1 = require('./app.component');
-var domain_module_1 = require('./domain/domain.module');
-var movies_module_1 = require('./movies/movies.module');
-var AppModule = (function () {
-    function AppModule() {
+var router_1 = require('@angular/router');
+var validation_message_component_1 = require('./validation-message/validation-message.component');
+var rating_component_1 = require('./rating/rating.component');
+var SharedModule = (function () {
+    function SharedModule() {
     }
-    AppModule = __decorate([
+    SharedModule = __decorate([
         core_1.NgModule({
+            id: 'shared',
             imports: [
-                domain_module_1.DomainModule,
                 platform_browser_1.BrowserModule,
-                http_1.HttpModule,
-                movies_module_1.MoviesModule
+                router_1.RouterModule
             ],
             declarations: [
-                app_component_1.AppComponent
+                validation_message_component_1.ValidationMessageComponent,
+                rating_component_1.RatingComponent
             ],
-            providers: [],
-            bootstrap: [app_component_1.AppComponent]
+            exports: [
+                validation_message_component_1.ValidationMessageComponent,
+                rating_component_1.RatingComponent
+            ]
         }), 
         __metadata('design:paramtypes', [])
-    ], AppModule);
-    return AppModule;
+    ], SharedModule);
+    return SharedModule;
 }());
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+exports.SharedModule = SharedModule;
+//# sourceMappingURL=shared.module.js.map

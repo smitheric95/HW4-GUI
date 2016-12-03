@@ -10,7 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var movie_repository_service_1 = require('../repositories/movie-repository.service');
+var movie_repository_service_1 = require('../../domain/movies/movie-repository.service');
+var movie_1 = require('../../domain/movies/movie');
 var MovieEditorComponent = (function () {
     function MovieEditorComponent(route, router, movieRepositoryService) {
         this.route = route;
@@ -19,7 +20,7 @@ var MovieEditorComponent = (function () {
     }
     MovieEditorComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.movie = {};
+        this.movie = new movie_1.Movie();
         this.years = Array(50).fill(0).map(function (x, i) { return (new Date().getFullYear() - i); });
         this.isAdding = true;
         this.route.params.forEach(function (x) { return _this.load(+x['id']); });
@@ -59,11 +60,15 @@ var MovieEditorComponent = (function () {
         this.router.navigateByUrl('/')
             .then(function () { return alert(message); });
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', movie_1.Movie)
+    ], MovieEditorComponent.prototype, "movie", void 0);
     MovieEditorComponent = __decorate([
         core_1.Component({
             selector: 'movie-editor',
-            templateUrl: './app/movie-editor/movie-editor.html',
-            styleUrls: ['./app/movie-editor/movie-editor.css']
+            templateUrl: './app/movies/movie-editor/movie-editor.html',
+            styleUrls: ['./app/movies/movie-editor/movie-editor.css']
         }), 
         __metadata('design:paramtypes', [router_1.ActivatedRoute, router_1.Router, movie_repository_service_1.MovieRepositoryService])
     ], MovieEditorComponent);

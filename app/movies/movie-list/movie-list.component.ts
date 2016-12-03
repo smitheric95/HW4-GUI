@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { MovieRepositoryService } from '../repositories/movie-repository.service';
+import { MovieRepositoryService } from '../../domain/movies/movie-repository.service';
 
 @Component({
 	selector: 'movie-list',
-	templateUrl: './app/movie-list/movie-list.html',
-	styleUrls: ['./app/movie-list/movie-list.css']
+	templateUrl: './app/movies/movie-list/movie-list.html',
+	styleUrls: ['./app/movies/movie-list/movie-list.css']
 })
 
 export class MovieListComponent {

@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var movie_repository_service_1 = require('../repositories/movie-repository.service');
+var movie_repository_service_1 = require('../../domain/movies/movie-repository.service');
 var MovieListComponent = (function () {
     function MovieListComponent(route, router, movieRepositoryService) {
         var _this = this;
@@ -32,8 +32,8 @@ var MovieListComponent = (function () {
     MovieListComponent = __decorate([
         core_1.Component({
             selector: 'movie-list',
-            templateUrl: './app/movie-list/movie-list.html',
-            styleUrls: ['./app/movie-list/movie-list.css']
+            templateUrl: './app/movies/movie-list/movie-list.html',
+            styleUrls: ['./app/movies/movie-list/movie-list.css']
         }), 
         __metadata('design:paramtypes', [router_1.ActivatedRoute, router_1.Router, movie_repository_service_1.MovieRepositoryService])
     ], MovieListComponent);

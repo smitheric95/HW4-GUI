@@ -1,36 +1,25 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule }   from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { AppComponent }   from './app.component';
-import { MovieRepositoryService } from './repositories/movie-repository.service';
-import { MovieEditorComponent }   from './movie-editor/movie-editor.component';
-import { MovieListComponent }   from './movie-list/movie-list.component';
-import { RatingComponent }   from './rating/rating.component';
 import { MockApiService } from './mock-api.service';
+import { DomainModule } from './domain/domain.module';
+import { MoviesModule } from './movies/movies.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  imports:      [ 
+  imports:      [
+    DomainModule, 
   	BrowserModule,
-    FormsModule,
     HttpModule,
-    RouterModule.forRoot([
-      { path: '', component: MovieListComponent },
-      { path: 'add', component: MovieEditorComponent },
-      { path: 'edit/:id', component: MovieEditorComponent }
-    ]),
-    InMemoryWebApiModule.forRoot(MockApiService)
+    MoviesModule
   ],
   declarations: [
-  	AppComponent,
-  	MovieListComponent,
-    MovieEditorComponent,
-    RatingComponent
+  	AppComponent
   ],
-  providers: [ MovieRepositoryService ],
+  providers: [ ],
   bootstrap:    [ AppComponent ]
 })
 
