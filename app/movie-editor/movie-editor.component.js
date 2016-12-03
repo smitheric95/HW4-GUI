@@ -22,24 +22,42 @@ var MovieEditorComponent = (function () {
         this.movie = {};
         this.years = Array(50).fill(0).map(function (x, i) { return (new Date().getFullYear() - i); });
         this.isAdding = true;
-        this.title = "New Movie";
-        this.route.params.forEach(function (params) {
-            if (params['id'] !== undefined) {
-                _this.movieRepositoryService.get(+params['id']).then(function (data) { _this.movie = data; });
-                _this.isAdding = false;
-                _this.title = _this.movie.title;
-            }
-        });
+        this.route.params.forEach(function (x) { return _this.load(+x['id']); });
     };
     MovieEditorComponent.prototype.save = function () {
+        var _this = this;
         if (this.isAdding == true) {
             if (this.movie.imagePath == null)
                 this.movie.imagePath = "images/blank.jpg";
-            this.movieRepositoryService.add(this.movie);
+            this.movieRepositoryService.add(this.movie)
+                .then(function () { return _this.returnToList(_this.movie.title + " has been added!"); });
         }
-        else
-            this.movieRepositoryService.update(this.movie);
-        this.router.navigateByUrl('');
+        else {
+            this.movieRepositoryService.update(this.movie)
+                .then(function () { return _this.returnToList(_this.movie.title + " has been updated!"); });
+        }
+    };
+    MovieEditorComponent.prototype.load = function (id) {
+        var _this = this;
+        if (!id) {
+            this.title = "New Movie";
+            return;
+        }
+        var onload = function (data) {
+            if (data) {
+                _this.movie = data;
+                _this.isAdding = false;
+                _this.title = _this.movie.title;
+            }
+            else {
+                _this.returnToList('Movie not found.');
+            }
+        };
+        this.movieRepositoryService.get(id).then(onload);
+    };
+    MovieEditorComponent.prototype.returnToList = function (message) {
+        this.router.navigateByUrl('/')
+            .then(function () { return alert(message); });
     };
     MovieEditorComponent = __decorate([
         core_1.Component({

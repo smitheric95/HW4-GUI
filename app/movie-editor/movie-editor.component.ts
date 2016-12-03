@@ -21,27 +21,46 @@ export class MovieEditorComponent {
         this.movie = {};
         this.years = Array(50).fill(0).map((x, i) => (new Date().getFullYear() - i));
         this.isAdding = true;
-        this.title = "New Movie";
 
-        this.route.params.forEach(params => {
-            if (params['id'] !== undefined) {
-                this.movieRepositoryService.get(+params['id']).then((data) => { this.movie = data; });
+        this.route.params.forEach(x => this.load(+x['id']));
 
-                this.isAdding = false;
-                this.title = this.movie.title;
-            }
-        });
     }
 
     save() {
         if (this.isAdding == true) {
             if (this.movie.imagePath == null)
                 this.movie.imagePath = "images/blank.jpg"
-            this.movieRepositoryService.add(this.movie);
+            this.movieRepositoryService.add(this.movie)
+                .then(() => this.returnToList(`${this.movie.title} has been added!`));
         }
-        else
-            this.movieRepositoryService.update(this.movie);
-        this.router.navigateByUrl('');
+        else{
+            this.movieRepositoryService.update(this.movie)
+                .then(() => this.returnToList(`${this.movie.title} has been updated!`));
+        }
+    }
+
+    private load(id) {
+        if (!id) {
+            this.title = "New Movie";
+            return;
+        }
+
+        var onload = (data) => {
+            if (data) {
+                this.movie = data;
+                this.isAdding = false;
+                this.title = this.movie.title;
+            } else {
+                this.returnToList('Movie not found.');
+            }
+        }
+
+        this.movieRepositoryService.get(id).then(onload);
+    }
+
+    private returnToList(message) {
+        this.router.navigateByUrl('/')
+            .then(() => alert(message));
     }
 
 }

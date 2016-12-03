@@ -20,7 +20,10 @@ export class MovieListComponent {
 	}
 
 	delete(movie) {
-		this.movieRepositoryService.delete(movie);
+		this.movieRepositoryService.delete(movie)
+			.then(() => {
+				alert(`${movie.title} has been deleted`);
+			});
 	
 		this.movies = this.movies.filter(function (obj) {
 			return obj.id !== movie.id;

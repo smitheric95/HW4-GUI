@@ -21,7 +21,10 @@ var MovieListComponent = (function () {
         movieRepositoryService.list().then(function (x) { return _this.movies = x; });
     }
     MovieListComponent.prototype.delete = function (movie) {
-        this.movieRepositoryService.delete(movie);
+        this.movieRepositoryService.delete(movie)
+            .then(function () {
+            alert(movie.title + " has been deleted");
+        });
         this.movies = this.movies.filter(function (obj) {
             return obj.id !== movie.id;
         });
