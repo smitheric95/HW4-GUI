@@ -12,9 +12,10 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var angular_in_memory_web_api_1 = require('angular-in-memory-web-api');
 var forms_1 = require('@angular/forms');
+var http_1 = require('@angular/http');
+var router_1 = require('@angular/router');
 var movie_list_component_1 = require('./movie-list/movie-list.component');
 var movie_editor_component_1 = require('./movie-editor/movie-editor.component');
-var router_1 = require('@angular/router');
 var shared_module_1 = require('../shared/shared.module');
 var mock_api_service_1 = require('../mock-api.service');
 var MoviesModule = (function () {
@@ -29,6 +30,7 @@ var MoviesModule = (function () {
             ],
             imports: [
                 platform_browser_1.BrowserModule,
+                http_1.HttpModule,
                 router_1.RouterModule.forRoot([
                     { path: '', component: movie_list_component_1.MovieListComponent },
                     { path: 'add', component: movie_editor_component_1.MovieEditorComponent },

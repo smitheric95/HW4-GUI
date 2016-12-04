@@ -9,11 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var platform_browser_1 = require('@angular/platform-browser');
-var http_1 = require('@angular/http');
 var app_component_1 = require('./app.component');
 var domain_module_1 = require('./domain/domain.module');
 var movies_module_1 = require('./movies/movies.module');
+var shared_module_1 = require('./shared/shared.module');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -21,9 +20,8 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [
                 domain_module_1.DomainModule,
-                platform_browser_1.BrowserModule,
-                http_1.HttpModule,
-                movies_module_1.MoviesModule
+                movies_module_1.MoviesModule,
+                shared_module_1.SharedModule
             ],
             declarations: [
                 app_component_1.AppComponent

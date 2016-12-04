@@ -12,6 +12,8 @@ var core_1 = require('@angular/core');
 var ValidationMessageComponent = (function () {
     function ValidationMessageComponent() {
     }
+    ValidationMessageComponent.prototype.ngOnInit = function () { console.log(this.target); };
+    ;
     Object.defineProperty(ValidationMessageComponent.prototype, "errors", {
         get: function () {
             return this.target.errors ? Object.keys(this.target.errors) : [];

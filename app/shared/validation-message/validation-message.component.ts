@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 export class ValidationMessageComponent {
     @Input() target;
     @Input() messages;
-
+    ngOnInit() {console.log(this.target)};
     get errors() {
         return this.target.errors ? Object.keys(this.target.errors) : [];
     }

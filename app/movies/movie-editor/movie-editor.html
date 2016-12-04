@@ -3,42 +3,68 @@
 	<div class="col-md-7">
 		<div class="panel panel-info">
 			<div class="panel-body">
-				<div class="form-group">
-					<label for="movie_title">
-                        Name
-                    </label>
-					<input 
-                        id="movie_title" 
-                        class="form-control" 
-                        [(ngModel)]="movie.title" />
-				</div>
-				<div class="form-group">
-					<label for="movie_year">
-                        Year
-                    </label>
-					<input 
-                        class="form-control" 
-                        [(ngModel)]="movie.year" list="movie_year" name="movie_year">
-					<datalist
-						id="movie_year" 
-					>
-					<option *ngFor="let number of years" value="{{number}}">
-					</datalist>
-				</div>
-				<br />
-				<div class="form-group">
-					<label for="movie_imagePath">
-                        Image path
-                    </label>
-					<input 
-                        id="movie_imagePath" 
-                        class="form-control" 
-                        [(ngModel)]="movie.imagePath" />
-				</div>
+				<form (ngSubmit)="save()" #movieForm="ngForm">
+					<div class="form-group">
+						<label for="movie_title">
+							Name
+						</label>
+						<input 
+							id="movie_title" 
+							class="form-control"
+							type="text" 
+							#movie_title="ngModel"
+							[(ngModel)]="movie.title"
+							name="movie_title"
+							required
+							 />
+						<validation-message
+							[target]="movie_title"
+							[messages]="{
+								required: 'Title is required',
+								pattern: 'Invalid year'
+							}"
+						>
+						</validation-message>
+					</div>
+					<div class="form-group">
+						<label for="movie_year">
+							Year
+						</label>
+						<input 
+							class="form-control" 
+							name="year"
+							#movie_year="ngModel"
+							[(ngModel)]="movie.year" list="movie_year" name="movie_year">
+						<datalist
+							id="movie_year" 
+						>
+						<validation-message 
+							[target]="movie_year"
+							[messages]="{
+								required: 'Year is required',
+								pattern: 'Invalid year'
+							}"
+						>
+						</validation-message>
+						<option *ngFor="let number of years" value="{{number}}">
+						</datalist>
+					</div>
+					<br />
+					<div class="form-group">
+						<label for="movie_imagePath">
+							Image path
+						</label>
+						<input 
+							id="movie_imagePath" 
+							class="form-control" 
+							name="image"
+							[(ngModel)]="movie.imagePath" />
+					</div>
+				</form>
 			</div>
 		</div>
 		<div class="col-md-12">
-			<a class="btn btn-primary btn-block btn-lg" (click)="save()">
+			<a class="btn btn-primary btn-block btn-lg">
             Save
          </a>
 			<a class="btn btn-default btn-block btn-lg" routerLink="/">
